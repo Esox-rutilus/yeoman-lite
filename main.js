@@ -28,7 +28,6 @@ if (!fs.existsSync(templateDir)) {
 
 const absOutputPath = nowrapper ? path.resolve(process.cwd(), outputPath) : path.resolve(process.cwd(), outputPath, name);
 fs.mkdirSync(absOutputPath, { recursive: true });
-
 const replacements = {
   NAME: name,
   NAMEPASCAL: name.split('-').map(x => x.charAt(0).toUpperCase() + x.slice(1)).reduce((prev, cur) => prev+cur, ''),
