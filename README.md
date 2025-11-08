@@ -1,5 +1,3 @@
-const readme = `
-
 # 🛠️ yl – Your Lightweight File Generator
 
 **yl** is a global Node.js CLI tool that helps you quickly scaffold files and folders from templates — perfect for React components, configuration files, or any code structure you use repeatedly.

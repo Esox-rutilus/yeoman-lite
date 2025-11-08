@@ -14,10 +14,11 @@ program
   .argument("<template>", "Template name (e.g. react-template)")
   .argument("<output>", "Output path (relative or absolute)")
   .requiredOption("--name <name>", "Component or file name")
+  .option("--nowrapper <bool>", "Should we wrap the template in a folder named __NAME__")
   .parse(process.argv);
 
 const [template, outputPath] = program.args;
-const { name } = program.opts();
+const { name, nowrapper } = program.opts();
 
 const templateDir = path.join(__dirname, "templates", template);
 if (!fs.existsSync(templateDir)) {
@@ -25,11 +26,12 @@ if (!fs.existsSync(templateDir)) {
   process.exit(1);
 }
 
-const absOutputPath = path.resolve(process.cwd(), outputPath, name);
+const absOutputPath = nowrapper ? path.resolve(process.cwd(), outputPath) : path.resolve(process.cwd(), outputPath, name);
 fs.mkdirSync(absOutputPath, { recursive: true });
 
 const replacements = {
   NAME: name,
+  NAMEPASCAL: name.split('-').map(x => x.charAt(0).toUpperCase() + x.slice(1)).reduce((prev, cur) => prev+cur, ''),
   DATE: new Date().toLocaleDateString(),
 };
 
