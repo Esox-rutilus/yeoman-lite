@@ -1,5 +1,5 @@
 export type __NAMEPASCAL__API = {
-
+    closeWindow: () => void,
 }
 
 declare global {
