@@ -86,7 +86,6 @@ const absOutputPath = useNoWrapper
   : path.resolve(cwd, outputPath, name);
 
 fs.mkdirSync(absOutputPath, { recursive: true });
-
 const replacements = {
   NAME: name,
   NAMEPASCAL: name
@@ -94,6 +93,7 @@ const replacements = {
     .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
     .join(""),
   DATE: new Date().toLocaleDateString(),
+  FILEINDEX: `${fs.readdirSync(absOutputPath).length + 1}`
 };
 
 function replacePlaceholders(str: string, replacements: Record<string, string>): string {
